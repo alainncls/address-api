@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: address-api
+
+server:
+  error:
+    include-message: always
