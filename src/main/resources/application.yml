@@ -1,7 +1,8 @@
 spring:
   application:
     name: address-api
-
 server:
   error:
     include-message: always
+data-gouv:
+  api-address: "https://api-adresse.data.gouv.fr"
