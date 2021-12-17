@@ -9,4 +9,3 @@ This project aims to wrap the French "[Address API](https://adresse.data.gouv.fr
 ## To Documentation
 
 * Unit tests
-* API documentation

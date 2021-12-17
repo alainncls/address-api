@@ -22,6 +22,6 @@ public class AddressController {
                                          @RequestParam(value = "latitude", required = false) Double latitude,
                                          @RequestParam(value = "longitude", required = false) Double longitude,
                                          @RequestParam(value = "postCode", required = false) Integer postCode) {
-        return addressServiceService.searchAddresses(address,  latitude, longitude, postCode);
+        return addressServiceService.searchAddresses(address, latitude, longitude, postCode);
     }
 }

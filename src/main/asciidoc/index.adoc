@@ -1,0 +1,28 @@
+= Addresses API documentation
+:toc:
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toclevels: 4
+:sectlinks:
+
+This page aims to describe all endpoints exposed by the "Addresses" service.
+
+== Addresses API
+
+=== Search addresses
+
+.Request
+include::{snippets}/searchAddresses/http-request.adoc[]
+
+.Request parameters
+include::{snippets}/searchAddresses/request-parameters.adoc[]
+
+.Response
+[%collapsible]
+====
+include::{snippets}/searchAddresses/http-response.adoc[]
+====
+
+.Response fields
+include::{snippets}/searchAddresses/response-fields.adoc[]

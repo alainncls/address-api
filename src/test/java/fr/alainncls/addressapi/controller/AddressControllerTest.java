@@ -68,10 +68,10 @@ class AddressControllerTest {
     void getAddress() throws Exception {
         List<Address> expectedAddress = List.of(address1, address2);
 
-        when(addressService.searchAddresses("55 Rue du Faubourg Saint-Honoré", 2.31065, 48.872986, 75008)).thenReturn(expectedAddress);
+        when(addressService.searchAddresses("55 Rue du Faubourg Saint-Honore", 2.31065, 48.872986, 75008)).thenReturn(expectedAddress);
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/addresses/search")
-                        .param("address", "55 Rue du Faubourg Saint-Honoré")
+                        .param("address", "55 Rue du Faubourg Saint-Honore")
                         .param("latitude", "2.31065")
                         .param("longitude", "48.872986")
                         .param("postCode", "75008"))
@@ -90,7 +90,7 @@ class AddressControllerTest {
                                 parameterWithName("longitude").optional().description("The longitude if we know it"),
                                 parameterWithName("postCode").optional().description("The postal code to narrow the search")),
                         responseFields(
-                                fieldWithPath("[]").description("The list of results"),
+                                fieldWithPath("[]").description("The list of results (maximum 10)"),
                                 fieldWithPath("[].label").description("Full address"),
                                 fieldWithPath("[].score").description("Accuracy score (out of 1)"),
                                 fieldWithPath("[].houseNumber").description("House number"),
