@@ -5,10 +5,7 @@ import fr.alainncls.addressapi.model.RawAddress;
 import fr.alainncls.addressapi.model.SearchResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,23 +16,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class AddressService {
 
-    private final WebClient webClient;
+    private ApiCallerService apiCallerService;
 
     public List<Address> searchAddresses(String address, Double latitude, Double longitude, Integer postcode) {
-        Mono<SearchResponse> request = webClient
-                .method(HttpMethod.GET)
-                .uri(uriBuilder -> uriBuilder
-                        .path("search/")
-                        .queryParam("q", address.replaceAll("\\s+", "+"))
-                        .queryParam("limit", 10)
-                        .queryParam("latitude", latitude)
-                        .queryParam("longitude", longitude)
-                        .queryParam("postcode", postcode)
-                        .build())
-                .retrieve()
-                .bodyToMono(SearchResponse.class);
-
-        SearchResponse searchResponse = request.block();
+        SearchResponse searchResponse = apiCallerService.searchAddresses(address, latitude, longitude, postcode);
 
         if (searchResponse == null) {
             return new ArrayList<>();
