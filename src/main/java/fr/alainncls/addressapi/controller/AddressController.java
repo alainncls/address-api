@@ -17,15 +17,11 @@ public class AddressController {
 
     private final AddressService addressServiceService;
 
-    @GetMapping("/")
+    @GetMapping("/search")
     public List<Address> searchAddresses(@RequestParam("address") String address,
-                                         @RequestParam(value = "limit", required = false) Integer limit,
-                                         @RequestParam(value = "autocomplete", required = false) Boolean autocomplete,
                                          @RequestParam(value = "latitude", required = false) Double latitude,
                                          @RequestParam(value = "longitude", required = false) Double longitude,
-                                         @RequestParam(value = "type", required = false) String type,
-                                         @RequestParam(value = "postCode", required = false) Integer postCode,
-                                         @RequestParam(value = "cityCode", required = false) Integer cityCode) {
-        return addressServiceService.searchAddresses(address, limit, autocomplete, latitude, longitude, type, postCode, cityCode);
+                                         @RequestParam(value = "postCode", required = false) Integer postCode) {
+        return addressServiceService.searchAddresses(address,  latitude, longitude, postCode);
     }
 }

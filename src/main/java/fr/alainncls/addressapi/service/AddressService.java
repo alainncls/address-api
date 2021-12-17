@@ -21,19 +21,16 @@ public class AddressService {
 
     private final WebClient webClient;
 
-    public List<Address> searchAddresses(String address, Integer limit, Boolean autocomplete, Double latitude, Double longitude, String type, Integer zipcode, Integer cityCode) {
+    public List<Address> searchAddresses(String address, Double latitude, Double longitude, Integer postcode) {
         Mono<SearchResponse> request = webClient
                 .method(HttpMethod.GET)
                 .uri(uriBuilder -> uriBuilder
                         .path("search/")
                         .queryParam("q", address.replaceAll("\\s+", "+"))
-                        .queryParam("limit", limit)
-                        .queryParam("autocomplete", autocomplete)
+                        .queryParam("limit", 10)
                         .queryParam("latitude", latitude)
                         .queryParam("longitude", longitude)
-                        .queryParam("type", type)
-                        .queryParam("zipcode", zipcode)
-                        .queryParam("cityCode", cityCode)
+                        .queryParam("postcode", postcode)
                         .build())
                 .retrieve()
                 .bodyToMono(SearchResponse.class);
@@ -57,8 +54,8 @@ public class AddressService {
                     .cityCode(rawAddress.getCityCode())
                     .city(rawAddress.getCity())
                     .street(rawAddress.getStreet())
-                    .longitude(coordinates[0])
-                    .latitude(coordinates[1])
+                    .latitude(coordinates[0])
+                    .longitude(coordinates[1])
                     .build();
         }).collect(Collectors.toList());
     }
